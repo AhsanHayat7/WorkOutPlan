@@ -4,6 +4,7 @@ use App\Http\Controllers\WorkoutController;
 use App\Models\Workoutplan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ExerciseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,12 @@ Route::post('/workout/store',[WorkoutController::class, 'store'])->name('workout
 Route::get('/workout/edit/{id}',[WorkoutController::class, 'edit'])->name('workout.edit');
 Route::post('/workout/update/{id}',[WorkoutController::class, 'update'])->name('workout.update');
 Route::get('/workout/delete/{id}',[WorkoutController::class, 'destroy'])->name('workout.delete');
+
+
+Route::get('/workout-detail',[ExerciseController::class, 'index'])->name('workout.detail');
+Route::get('/workout-detail/edit/{id}',[ExerciseController::class, 'edit'])->name('detail.edit');
+Route::post('/workout-detail/update/{id}',[ExerciseController::class, 'update'])->name('detail.update');
+Route::get('/workout-detail/delete/{id}',[ExerciseController::class, 'destroy'])->name('detail.delete');
 
 
 });

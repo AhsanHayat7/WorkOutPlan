@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Excercise;
 use App\Models\Workoutplan;
 use Illuminate\Http\Request;
-use Illuminate\support\Facades\Auth;
 use App\Models\User;
-use Carbon\Carbon;
 
-
-class WorkoutController extends Controller
+class ExerciseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +14,11 @@ class WorkoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {       $workouts = Workoutplan::all();
-            // $day_of_week = Carbon::now();
-            $users = User::all();
-
-        return view('workoutplan.index',compact('workouts','users'));
+    {
+        //
+        $workouts = Workoutplan::all();
+        $exercises = Excercise::all();
+        return view('workout-details.index',compact('workouts','exercises'));
     }
 
     /**
@@ -33,8 +29,6 @@ class WorkoutController extends Controller
     public function create()
     {
         //
-        $excercises = Excercise::all();
-            return view ('workoutplan.create',compact('excercises'));
     }
 
     /**
@@ -45,24 +39,7 @@ class WorkoutController extends Controller
      */
     public function store(Request $request)
     {
-
-
-       $workout =  Workoutplan::create([
-            'user_id' => Auth::id(),
-            'day_of_week'=> $request->day_of_week,
-            'rest_day'=> $request->rest_day,
-        ]);
-
-        Excercise::create([
-            'workoutplan_id' => $workout->id,
-            'name'=> $request->name,
-            'duration_minutes'=> $request->duration_minutes
-        ]);
-
-        toastr('Sucessfully Created Workout Plan.');
-
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -85,10 +62,12 @@ class WorkoutController extends Controller
     public function edit($id)
     {
         //
-        $workout = Workoutplan::find($id);
+        $exercise = Excercise::find($id);
         $users  = User::all();
-        return view('workoutplan.edit',compact('workout','users'));
+
+        return view('workout-details.edit',compact('exercise','users'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -99,13 +78,14 @@ class WorkoutController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $workout = Workoutplan::find($id);
-        $workout->day_of_week = $request->day_of_week;
-        $workout->rest_day = $request->rest_day;
-        $workout->save();
 
-        toastr('Your Workout has been  Updated Successfully.');
-        return  redirect()->route('workout');
+        $exercise = Excercise::find($id);
+        $exercise->name = $request->name;
+        $exercise->duration_minutes = $request->duration_minutes;
+        $exercise->save();
+
+        toastr('Your Exercise has been  Updated Successfully.');
+        return  redirect()->route('home');
 
     }
 
@@ -118,16 +98,10 @@ class WorkoutController extends Controller
     public function destroy($id)
     {
         //
-       $workout =  Workoutplan::find($id);
+        $exercise = Excercise::find($id);
+        $exercise->delete();
 
-       $workout->delete();
-
-       toastr('Your workout plan have been deleted Successfully');
-
-       return redirect()->back();
+        toastr('Your Exercise has been Deleted Successfully.');
+        return redirect()->back();
     }
-
-
 }
-
-

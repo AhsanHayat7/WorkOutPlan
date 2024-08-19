@@ -95,6 +95,9 @@
                         <li class="list-group-item">
                             <a href="{{ route('workout') }}">All Workout Plans</a>
                         </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('workout.detail') }}">All Workout Plans Details</a>
+                        </li>
                     </ul>
                     @endif
                 </div>

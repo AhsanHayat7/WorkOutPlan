@@ -7,19 +7,23 @@
 
         <div class="card">
             <div class="card-header">
-                Edit Workout Plan:{{$workout->user->name}}
+                @foreach ($users as $user)
+
+
+                Edit Workout Plan : {{$user->name}}
+                @endforeach
             </div>
             <div class="card-body">
                 <form action="{{ route('workout.update',['id'=>$workout->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Day of Week </label>
-                        <input type="text" name="name"  value={{$workout->day_of_week}} class="form-control" id="name">
+                        <label for="day">Day of Week </label>
+                        <input type="text" name="day_of_week"  value={{$workout->day_of_week}} class="form-control">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="name">Rest Day</label>
-                        <input type="text" name="name"  value={{$workout->rest_day}} class="form-control" id="name">
+                        <input type="text" name="rest_day"  value={{$workout->rest_day}} class="form-control">
                     </div>
                     <br>
                     <div class="form-group text-center">

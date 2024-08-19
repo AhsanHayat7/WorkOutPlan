@@ -3,19 +3,16 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            @foreach ($users as $user)
-
-
-            Users : {{$user->name}}
-            @endforeach
+            Users
         </div>
     </div>
 
     <table class="table table-bordered table-dark">
         <thead>
             <tr>
-                <th scope="col">Id</th>
                 <th scope="col">Day of Week</th>
+                <th scope="col">Excercises</th>
+                <th scope="col">Durations</th>
                 <th scope="col">Rest Day</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
@@ -23,12 +20,10 @@
         </thead>
         <tbody>
             @foreach ($workouts as $workout)
+                @foreach ($exercises as $exercise)
 
 
             <tr>
-                <td>
-                    {{$workout->id}}
-                </td>
 
                 <td>
                     @if($workout->day_of_week == 1)
@@ -52,6 +47,13 @@
                     @endif
                 </td>
 
+                <td>
+                    {{$exercise->name}}
+                </td>
+
+                <td>
+                    {{$exercise->duration_minutes}}
+                </td>
 
                 <td>
                     @if($workout->rest_day)
@@ -63,12 +65,14 @@
                     @endif
 
                 </td>
-                <td><a href="{{ route('workout.edit', ['id' => $workout->id]) }}" class="btn btn-xs btn-info">Edit</a>
+
+
+                <td><a href="{{ route('detail.edit', ['id' => $exercise->id]) }}" class="btn btn-xs btn-info">Edit</a>
                     <span class="glyphicon  glyphicon-pencil"></span>
                 </td>
 
 
-                <td><a href="{{ route('workout.delete', ['id' => $workout->id]) }}" class="btn btn-xs btn-danger">Trashed</a>
+                <td><a href="{{ route('detail.delete', ['id' => $exercise->id]) }}" class="btn btn-xs btn-danger">Trashed</a>
                     <span class="glyphicon  glyphicon-trash"></span>
                 </td>
             </tr>
@@ -76,6 +80,8 @@
              <tr>
 
             </tr>
+                @endforeach
+
             @endforeach
         </tbody>
     </table>
