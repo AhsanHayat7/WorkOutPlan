@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Excercise;
+use App\Models\Workoutplan;
+use Illuminate\Http\Request;
+use Illuminate\support\Facades\Auth;
+use Carbon\Carbon;
+
+class WorkoutController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {       $workouts = Workoutplan::all();
+            // $day_of_week = Carbon::now();
+
+        return view('workoutplan.index',compact('workouts'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $excercises = Excercise::all();
+            return view ('workoutplan.create',compact('excercises'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+
+       $workout =  Workoutplan::create([
+            'user_id' => Auth::id(),
+            'day_of_week'=> $request->day_of_week,
+            'rest_day'=> $request->rest_day,
+        ]);
+
+        Excercise::create([
+            'workoutplan_id' => $workout->id,
+            'name'=> $request->name,
+            'duration_minutes'=> $request->duration_minutes
+        ]);
+
+        toastr('Sucessfully Created Workout Plan.');
+
+
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $workout = Workoutplan::find($id);
+        return view('workoutplan.edit',compact('workout'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $workout = Workoutplan::find($id);
+        $workout->day_of_week = $request->day_of_week;
+        $workout->rest_day = $request->rest_day;
+        $workout->save();
+
+        toastr('Your Workout has been  Updated Successfully.');
+        return  redirect()->route('workout');
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+       $workout =  Workoutplan::find($id);
+
+       $workout->delete();
+
+       toastr('Your workout plan have been deleted Successfully');
+
+       return redirect()->back();
+    }
+}
