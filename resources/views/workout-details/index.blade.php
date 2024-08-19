@@ -3,7 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Users
+            @foreach ($users as $user)
+
+
+            Users : {{$user->name}}
+            @endforeach
         </div>
     </div>
 

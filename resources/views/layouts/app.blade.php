@@ -83,7 +83,7 @@
         <br>
         <div class="container">
             <div class="row justify-content-center align-items-start">
-                @if(Auth::check())
+             @if(Auth::check())
                 <div class="col-lg-4">
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -99,7 +99,7 @@
                             <a href="{{ route('workout.detail') }}">All Workout Plans Details</a>
                         </li>
                     </ul>
-                    @endif
+                @endif
                 </div>
                 <div class="col-lg-8">
                     @yield('content')

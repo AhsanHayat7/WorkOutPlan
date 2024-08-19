@@ -23,7 +23,7 @@
                     <br>
                     <div class="form-group">
                         <label for="name">Rest Day</label>
-                        <input type="text" name="rest_day"  value={{$workout->rest_day}} class="form-control">
+                        <input type="text" name="rest_day"  value={{$workout->rest_day }} class="form-control">
                     </div>
                     <br>
                     <div class="form-group text-center">

@@ -18,7 +18,8 @@ class ExerciseController extends Controller
         //
         $workouts = Workoutplan::all();
         $exercises = Excercise::all();
-        return view('workout-details.index',compact('workouts','exercises'));
+        $users =  User::all();
+        return view('workout-details.index',compact('workouts','exercises','users'));
     }
 
     /**
