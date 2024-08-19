@@ -15,6 +15,7 @@
         <thead>
             <tr>
                 <th scope="col">Id</th>
+                <th scope="col">Name</th>
                 <th scope="col">Day of Week</th>
                 <th scope="col">Rest Day</th>
                 <th scope="col">Edit</th>
@@ -29,6 +30,8 @@
                 <td>
                     {{$workout->id}}
                 </td>
+
+                <td>{{$user->name}}</td>
 
                 <td>
                     @if($workout->day_of_week == 1)
