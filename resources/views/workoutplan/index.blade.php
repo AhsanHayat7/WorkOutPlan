@@ -24,6 +24,8 @@
         </thead>
         <tbody>
             @foreach ($workouts as $workout)
+                @foreach ($users as $user)
+
 
 
             <tr>
@@ -79,6 +81,7 @@
              <tr>
 
             </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>
