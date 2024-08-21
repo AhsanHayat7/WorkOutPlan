@@ -18,11 +18,13 @@ class WorkoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {       $workouts = Workoutplan::all();
+    {       $workouts = Workoutplan::where('user_id', Auth::user()->id)->get();
             // $day_of_week = Carbon::now();
-            $users = User::all();
 
-        return view('workoutplan.index',compact('workouts','users'));
+
+
+
+        return view('workoutplan.index',compact('workouts'));
     }
 
     /**
@@ -33,8 +35,11 @@ class WorkoutController extends Controller
     public function create()
     {
         //
+
+        $workouts = Workoutplan::where('user_id', Auth::id())->where('day_of_week', 1)->get();
         $excercises = Excercise::all();
-            return view ('workoutplan.create',compact('excercises'));
+        $users = User::all();
+            return view ('workoutplan.create',compact('excercises','workouts','users'));
     }
 
     /**

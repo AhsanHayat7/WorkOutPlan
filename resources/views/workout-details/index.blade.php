@@ -3,11 +3,8 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            @foreach ($users as $user)
 
-
-            Users : {{$user->name}}
-            @endforeach
+            Users : {{Auth::user()->name}}
         </div>
     </div>
 
@@ -24,7 +21,7 @@
         </thead>
         <tbody>
             @foreach ($workouts as $workout)
-                @foreach ($exercises as $exercise)
+                @foreach ($workout->excercise as $exercise)
 
 
             <tr>

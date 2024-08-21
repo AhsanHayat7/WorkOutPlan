@@ -3,11 +3,10 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            @foreach ($users as $user)
 
 
-            Users : {{$user->name}}
-            @endforeach
+            Users : {{Auth::user()->name}}
+
         </div>
     </div>
 
@@ -24,37 +23,40 @@
         </thead>
         <tbody>
             @foreach ($workouts as $workout)
-                @foreach ($users as $user)
+
+
 
 
 
             <tr>
                 <td>
-                    {{$workout->id}}
+                    {{$workout->user->id}}
                 </td>
 
-                <td>{{$user->name}}</td>
+                <td>{{$workout->user->name}}</td>
 
                 <td>
-                    @if($workout->day_of_week == 1)
-                        {{"Monday"}}
-                    @elseif($workout->day_of_week == 2)
-                        {{"Tuesday"}}
-                    @elseif($workout->day_of_week == 3)
-                        {{"Wednesday"}}
-                    @elseif($workout->day_of_week == 4)
-                            {{"Thursday"}}
-                    @elseif($workout->day_of_week == 5 )
-                            {{"Friday"}}
 
-                    @elseif($workout->day_of_week == 6)
-                            {{"Saturday"}}
-                    @elseif($workout->day_of_week == 7)
-                            {{"Sunday"}}
-                    @else
-                        {{"No Day "}}
 
-                    @endif
+                        @if($workout->day_of_week == 1)
+                            {{"Monday"}}
+                        @elseif($workout->day_of_week == 2)
+                            {{"Tuesday"}}
+                        @elseif($workout->day_of_week == 3)
+                            {{"Wednesday"}}
+                        @elseif($workout->day_of_week == 4)
+                                {{"Thursday"}}
+                        @elseif($workout->day_of_week == 5 )
+                                {{"Friday"}}
+
+                        @elseif($workout->day_of_week == 6)
+                                {{"Saturday"}}
+                        @elseif($workout->day_of_week == 7)
+                                {{"Sunday"}}
+                        @else
+                            {{"No Day "}}
+
+                         @endif
                 </td>
 
 
@@ -81,7 +83,7 @@
              <tr>
 
             </tr>
-                @endforeach
+
             @endforeach
         </tbody>
     </table>

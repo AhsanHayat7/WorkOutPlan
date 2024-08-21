@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Excercise;
 use App\Models\Workoutplan;
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\Auth;
 use App\Models\User;
 
 class ExerciseController extends Controller
@@ -16,10 +17,12 @@ class ExerciseController extends Controller
     public function index()
     {
         //
-        $workouts = Workoutplan::all();
+
         $exercises = Excercise::all();
-        $users =  User::all();
-        return view('workout-details.index',compact('workouts','exercises','users'));
+
+        $workouts = Workoutplan::where('user_id', Auth::user()->id)->get();
+
+        return view('workout-details.index',compact('workouts','exercises'));
     }
 
     /**

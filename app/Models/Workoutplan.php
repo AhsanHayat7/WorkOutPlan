@@ -18,5 +18,8 @@ class Workoutplan extends Model
         return $this->hasMany(Excercise::class);
     }
 
+    public function day(){
+        return $this->belongsTo(Day_of_week::class);
+    }
 
 }
