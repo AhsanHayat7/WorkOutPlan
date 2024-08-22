@@ -17,7 +17,7 @@ class CreateWorkoutplansTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('day_of_week')->default(0);
-            $table->boolean('rest_day')->default(0);
+			$table->integer('rest_day')->nullable()->default(0);
             $table->timestamps();
         });
     }
