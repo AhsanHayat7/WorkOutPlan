@@ -10,16 +10,16 @@
             <div class="card-body">
                 <form action="{{ route('workout.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @php
-                    if (count($workouts) > 0){
-                    			$daysofweek = \App\Models\Day_of_week::whereNotIn('id', $workouts->pluck('day_of_week'))->get();
-                    		}
-                    		$is_rest_day = false;
-                    		$is_rest_day = \App\Models\Workoutplan::where('rest_day', 1)->where('user_id', Auth::id())->first();
-                    		if (!is_null($is_rest_day)) {
-                    		$is_rest_day = true;
-                    		}
-                    @endphp
+{{--                    @php--}}
+{{--                    if (count($workouts) > 0){--}}
+{{--                    			$daysofweek = \App\Models\Day_of_week::whereNotIn('id', $workouts->pluck('day_of_week'))->get();--}}
+{{--                    		}--}}
+{{--                    		$is_rest_day = false;--}}
+{{--                    		$is_rest_day = \App\Models\Workoutplan::where('rest_day', 1)->where('user_id', Auth::id())->first();--}}
+{{--                    		if (!is_null($is_rest_day)) {--}}
+{{--                    		$is_rest_day = true;--}}
+{{--                    		}--}}
+{{--                    @endphp--}}
 
                         <div class="form-group">
                             @foreach($daysofweek as $day)

@@ -39,16 +39,16 @@ class WorkoutController extends Controller
 		$excercises = Excercise::all();
 		$daysofweek = Day_of_week::all();
 
-//		if (count($workouts) > 0){
-//			$daysofweek = Day_of_week::whereNotIn('id', $workouts->pluck('day_of_week'))->get();
-//		}
-//		$is_rest_day = false;
-//		$is_rest_day = Workoutplan::where('rest_day', 1)->where('user_id', Auth::id())->first();
-//		if (!is_null($is_rest_day)) {
-//			$is_rest_day = true;
-//		}
+		if (count($workouts) > 0){
+			$daysofweek = Day_of_week::whereNotIn('id', $workouts->pluck('day_of_week'))->get();
+		}
+		$is_rest_day = false;
+		$is_rest_day = Workoutplan::where('rest_day', 1)->where('user_id', Auth::id())->first();
+		if (!is_null($is_rest_day)) {
+			$is_rest_day = true;
+		}
 
-		return view('workoutplan.create', compact('excercises', 'workouts', 'daysofweek'));
+		return view('workoutplan.create', compact('excercises', 'workouts', 'daysofweek','is_rest_day'));
 	}
 
 	/**
